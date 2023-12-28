@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<style nonce="#{cspNonce}">
+			@font-face {
+				font-family: 'codicon';
+				font-display: block;
+				src: url('#{webroot}/codicon.ttf?2ab61cbaefbdf4c7c5589068100bee0c') format('truetype');
+			}
+			@font-face {
+				font-family: 'glicons';
+				font-display: block;
+				src: url('#{root}/dist/glicons.woff2?8e33f5a80a91b05940d687a08305c156') format('woff2');
+			}
+		</style>
+	</head>
+
+	<body
+		class="welcome scrollable preload"
+		data-placement="#{placement}"
+		data-vscode-context='{ "webview": "#{webviewId}" }'
+	>
+		<!-- <canvas class="snow"></canvas>
+		<img
+			class="snow__trigger snow__trigger--fixed-right snow__trigger--flipped"
+			title="Let it snow — Happy Holidays!"
+			alt="Let it snow — Happy Holidays!"
+			src="#{root}/images/snowman.png"
+		/> -->
+		<header class="welcome__header">
+			<h1 class="welcome__brand"><gitlens-logo></gitlens-logo> <small>Git Supercharged</small></h1>
+			<p class="welcome__release">
+				<span
+					>Version
+					<a
+						id="version"
+						href="https://github.com/gitkraken/vscode-gitlens/blob/main/CHANGELOG.md"
+						title="Open CHANGELOG"
+						aria-label="Open CHANGELOG"
+					></a
+				></span>
+				<a
+					href="https://help.gitkraken.com/gitlens/gitlens-release-notes-current"
+					title="Open Release Notes"
+					aria-label="Open Release Notes"
+					>Release notes</a
+				>
+			</p>
+		</header>
+		<main class="welcome__main">
+			<section class="welcome__section">
+				<p class="t-feature">
+					Supercharge Git and unlock <strong>untapped knowledge</strong> within your repository to better
+					<strong>understand</strong>, <strong>write</strong>, and <strong>review</strong> code. Focus,
+					collaborate, accelerate.
+				</p>
+			</section>
+			<section class="welcome__section">
+				<h2>Powerful Features</h2>
+				<div class="welcome__gates">
+					<p>All features are free to use on all repos, <strong>except</strong> for features,</p>
+					<p>
+						●&nbsp;&nbsp;&nbsp;marked with a ✨ require a
+						<a
+							class="muted"
+							href="https://www.gitkraken.com/gitlens/pricing"
+							title="See plans for more information"
+							>trial or paid plan</a
+						>
+						for use on privately hosted repos
+						<br />
+						●&nbsp;&nbsp;&nbsp;marked with a ☁️ require a GitKraken Account, with access level based on your
+						<a
+							class="muted"
+							href="https://www.gitkraken.com/gitlens/pricing"
+							title="See plans for more information"
+							>plan</a
+						>
+						, e.g. Free, Pro, etc
+					</p>
+				</div>
+				<h3 class="checkbox-group">
+					<label class="checkbox" for="inline-blame"
+						><input type="checkbox" id="inline-blame" data-feature="blame" checked />Inline Blame</label
+					><span>and</span
+					><label class="checkbox" for="codelens"
+						><input type="checkbox" id="codelens" data-feature="codelens" checked />Git CodeLens</label
+					>
+				</h3>
+				<p>
+					Gain a deeper understanding of how code changed and by whom through in-editor code annotations and
+					rich hovers.
+				</p>
+
+				<gk-blame-svg id="blame" inline codelens></gk-blame-svg>
+
+				<p style="margin: 0.5rem 1rem 0 1rem">
+					<strong>Want more control?</strong>
+					Use the interactive
+					<a
+						href="command:gitlens.showSettingsPage"
+						title="Open GitLens Settings"
+						aria-label="Open GitLens Settings"
+						><code-icon icon="gear"></code-icon>&nbsp;GitLens Settings</a
+					>
+					editor to customize GitLens to meet your needs
+				</p>
+
+				<h3>File Annotations</h3>
+				<p class="welcome__toolbar">
+					<span>Use on-demand whole file annotations to see authorship, recent changes, and a heatmap</span>
+					<gk-editor-toolbar-svg annotations annotations-toggled></gk-editor-toolbar-svg>
+				</p>
+				<gk-annotations-svg id="annotations" toggled></gk-annotations-svg>
+
+				<h3>Revision Navigation</h3>
+				<p class="welcome__toolbar">
+					<span>Effortlessly explore the history of a file to see how the code evolved over time</span>
+					<gk-editor-toolbar-svg revision revision-toggled></gk-editor-toolbar-svg>
+				</p>
+				<gk-revision-navigation-svg id="revision" toggled></gk-revision-navigation-svg>
+
+				<h3>
+					<a
+						class="muted"
+						href="command:gitlens.showGraph"
+						data-requires="repo"
+						title="Open Commit Graph"
+						aria-label="Open Commit Graph"
+						>Commit Graph</a
+					>
+					✨
+				</h3>
+				<p>Easily visualize your repository and keep track of all work in progress.</p>
+				<p>
+					Use the rich commit search to find exactly what you're looking for. It's powerful filters allow you
+					to search by a specific commit, message, author, a changed file or files, or even a specific code
+					change.
+				</p>
+				<gk-graph-svg></gk-graph-svg>
+
+				<h3>Side Bar Views</h3>
+				<p>Powerful views into Git that don't come in the box.</p>
+				<nav class="welcome__views-nav" aria-label="Sidebar view links">
+					<a
+						href="command:gitlens.showCommitsView"
+						data-requires="repo"
+						title="Show Commits view"
+						aria-label="Show Commits view"
+						><code-icon icon="gl-commits-view" size="20"></code-icon>Commits</a
+					>
+					<a
+						href="command:gitlens.showCommitDetailsView"
+						data-requires="repo"
+						title="Show Commit Details view"
+						aria-label="Show Commit Details view"
+						><code-icon icon="gl-commit-view" size="20"></code-icon>Commit Details</a
+					>
+					<a
+						href="command:gitlens.showRepositoriesView"
+						data-requires="repo"
+						title="Show Repositories view"
+						aria-label="Show Repositories view"
+						><code-icon icon="gl-repositories-view" size="20"></code-icon>Repositories</a
+					>
+					<a
+						href="command:gitlens.showFileHistoryView"
+						data-requires="repo"
+						title="Show File History view"
+						aria-label="Show File History view"
+						><code-icon icon="gl-history-view" size="20"></code-icon>File History</a
+					>
+					<a
+						href="command:gitlens.showTimelineView"
+						data-requires="repo"
+						title="Show Visual File History view"
+						aria-label="Show Visual File History view"
+						><code-icon icon="graph-scatter" size="20"></code-icon>Visual File History ✨</a
+					>
+					<a
+						href="command:gitlens.showLineHistoryView"
+						data-requires="repo"
+						title="Show Line History view"
+						aria-label="Show Line History view"
+						><code-icon icon="gl-history-view" size="20"></code-icon>Line History</a
+					>
+					<a
+						href="command:gitlens.showBranchesView"
+						data-requires="repo"
+						title="Show Branches view"
+						aria-label="Show Branches view"
+						><code-icon icon="gl-branches-view" size="20"></code-icon>Branches</a
+					>
+					<a
+						href="command:gitlens.showRemotesView"
+						data-requires="repo"
+						title="Show Remotes view"
+						aria-label="Show Remotes view"
+						><code-icon icon="gl-remotes-view" size="20"></code-icon>Remotes</a
+					>
+					<a
+						href="command:gitlens.showStashesView"
+						data-requires="repo"
+						title="Show Stashes view"
+						aria-label="Show Stashes view"
+						><code-icon icon="gl-stashes-view" size="20"></code-icon>Stashes</a
+					>
+					<a
+						href="command:gitlens.showTagsView"
+						data-requires="repo"
+						title="Show Tags view"
+						aria-label="Show Tags view"
+						><code-icon icon="gl-tags-view" size="20"></code-icon>Tags</a
+					>
+					<a
+						href="command:gitlens.showWorktreesView"
+						data-requires="repo"
+						title="Show Worktrees view"
+						aria-label="Show Worktrees view"
+						><code-icon icon="gl-worktrees-view" size="20"></code-icon>Worktrees ✨</a
+					>
+					<a href="command:gitlens.showContributorsView" data-requires="repo"
+						><code-icon icon="gl-contributors-view" size="20"></code-icon>Contributors</a
+					>
+					<a
+						href="command:gitlens.showSearchAndCompareView"
+						data-requires="repo"
+						title="Show Search &amp; Compare view"
+						aria-label="Show Search &amp; Compare view"
+						><code-icon icon="gl-search-view" size="20"></code-icon>Search &amp; Compare</a
+					>
+					<a
+						href="command:gitlens.showWorkspacesView"
+						data-requires="repo"
+						title="Show GitKraken Workspaces view"
+						aria-label="Show GitKraken Workspaces view"
+						><code-icon icon="gl-workspaces-view" size="20"></code-icon>GitKraken Workspaces ☁️</a
+					>
+				</nav>
+				<p data-requires="norepo">
+					<code-icon icon="question"></code-icon> Features which need a repository are currently unavailable
+				</p>
+
+				<h3>
+					<a
+						class="muted"
+						href="command:gitlens.showWorkspacesView"
+						data-requires="repo"
+						title="Show GitKraken Workspaces view"
+						aria-label="Show GitKraken Workspaces view"
+						>GitKraken Workspaces</a
+					>
+					☁️ and
+					<a
+						class="muted"
+						href="command:gitlens.showFocusPage"
+						data-requires="repo"
+						title="Open Focus"
+						aria-label="Open Focus"
+						>Focus</a
+					>
+					✨
+					<span class="welcome__preview">Preview</span>
+				</h3>
+				<p>
+					Leverage workspaces to easily group and manage multiple repositories together, accessible from
+					anywhere, streamlining your workflow. Create workspaces just for yourself or share (coming soon in
+					GitLens) them with your team for faster onboarding and better collaboration.
+				</p>
+
+				<gk-workspaces-svg></gk-workspaces-svg>
+
+				<p>
+					Use the Focus view to bring all of your GitHub pull requests and issues into a unified actionable to
+					help to you more easily juggle work in progress, pending work, reviews, and more. Quickly see if
+					anything requires your attention while keeping you focused.
+				</p>
+
+				<gk-focus-svg></gk-focus-svg>
+
+				<h3>
+					<a
+						class="muted"
+						href="command:gitlens.showTimelineView"
+						data-requires="repo"
+						title="Show Visual File History view"
+						aria-label="Show Visual File History view"
+						>Visual File History</a
+					>
+					✨
+				</h3>
+				<p>
+					Quickly see the evolution of a file, including when changes were made, how large they were, and who
+					made them. Use it to quickly find when the most impactful changes were made to a file or who best to
+					talk to about file changes and more.
+				</p>
+				<gk-timeline-svg></gk-timeline-svg>
+
+				<h3>
+					<a
+						class="muted"
+						href="command:gitlens.showWorktreesView"
+						data-requires="repo"
+						title="Show Worktrees view"
+						aria-label="Show Worktrees view"
+						>Worktrees</a
+					>
+					✨
+				</h3>
+				<p>
+					Efficiently multitask by minimizing the context switching between branches, allowing you to easily
+					work on different branches of a repository simultaneously. Avoid interrupting your work in progress
+					when needing to review a pull request. Simply create a new worktree and open it in a new VS Code
+					window, all without impacting your other work.
+				</p>
+
+				<h3>Integrations</h3>
+				<p>
+					Simplify your workflow and quickly gain insights with automatic linking of issues and pull requests
+					across multiple Git hosting platforms including GitHub, GitHub Enterprise ✨, GitLab, GitLab
+					self-managed ✨, Gitea, Gerrit, Google Source, Bitbucket, Bitbucket Server, Azure DevOps, and custom
+					servers.
+				</p>
+				<p>
+					All integration provide automatic linking, while rich integrations with GitHub & GitLab offer
+					detailed hover information for autolinks, and correlations between pull requests, branches, and
+					commits, as well as user avatars for added context.
+				</p>
+				<p>
+					<strong>Define your own autolinks</strong>
+					<br />
+					Use autolinks to linkify external references, like Jira issues or Zendesk tickets, in commit
+					messages.
+				</p>
+				<gl-button appearance="secondary" href="command:gitlens.showSettingsPage?%22autolinks%22"
+					>Configure Autolinks</gl-button
+				>
+
+				<h3><code-icon icon="beaker" size="20"></code-icon> GitKraken Labs</h3>
+				<p>
+					Our incubator for experimentation and exploration with the community to gather early reactions and
+					feedback. Below are some of our current experiments.
+				</p>
+				<p>
+					<strong>Explain Commit (AI)</strong>
+					<br />
+					Use the Explain panel on the
+					<a
+						data-requires="repo"
+						href="command:gitlens.showCommitDetailsView"
+						title="Show Commit Details view"
+						>Commit Details view</a
+					>
+					to leverage AI to help you understand the changes introduced by a commit.
+				</p>
+				<p>
+					<strong>Automatically Generate Commit Message (AI)</strong>
+					<br />
+					Use the
+					<a
+						data-requires="repo"
+						href="command:workbench.action.quickOpen?%22>GitLens%3A%20Generate%20Commit%20Message%22"
+						title="Open Command Palette"
+						>Generate Commit Message</a
+					>
+					command from the Source Control view's context menu to automatically generate a commit message for
+					your staged changes by leveraging AI.
+				</p>
+			</section>
+
+			<section class="welcome__section welcome__section-bar">
+				<h2>Get Started</h2>
+				<p>
+					GitLens is <strong>powerful</strong>, <strong>feature rich</strong>, and highly
+					<strong>customizable</strong> to meet your needs. Check out our tutorial video and walkthrough to
+					get started.
+				</p>
+
+				<h2>Tutorial Video</h2>
+				<nav class="welcome__starting-nav" aria-label="Getting started links">
+					<video-button></video-button>
+					<span
+						><gl-button appearance="secondary" href="command:gitlens.getStarted"
+							>Get Started Walkthrough</gl-button
+						></span
+					>
+				</nav>
+
+				<div id="try-pro">
+					<h2>Try Pro ✨</h2>
+					<p class="h-space-half">Unlock the full power of GitLens ✨ and ☁️ features</p>
+					<p>
+						<gl-button appearance="secondary" href="command:gitlens.plus.loginOrSignUp"
+							>Start a Pro trial</gl-button
+						>
+						&nbsp;or <a href="command:gitlens.plus.loginOrSignUp" title="Sign In">sign in</a>
+					</p>
+				</div>
+
+				<h2>Quick Access</h2>
+				<p data-requires="norepo">
+					<code-icon icon="question"></code-icon> Features which need a repository are currently unavailable
+				</p>
+				<nav class="welcome__resources-nav">
+					<h3 class="t-eyebrow">Activity Bar</h3>
+					<a
+						href="command:workbench.view.extension.gitlens"
+						title="Show GitLens Side Bar"
+						aria-label="Show GitLens Side Bar"
+						><code-icon icon="gl-gitlens"></code-icon><span>GitLens</span></a
+					>
+					<a
+						href="command:workbench.view.scm"
+						data-requires="repo"
+						title="Show Source Control Side Bar"
+						aria-label="Show GitLens Side Bar"
+						><code-icon icon="source-control"></code-icon><span>Source Control</span></a
+					>
+					<a
+						href="command:workbench.view.extension.gitlensInspect"
+						data-requires="repo"
+						title="Show GitLens Inspect Side Bar"
+						aria-label="Show GitLens Inspect Side Bar"
+						><code-icon icon="gl-gitlens-inspect"></code-icon><span>GitLens Inspect</span></a
+					>
+				</nav>
+				<nav class="welcome__resources-nav">
+					<h3 class="t-eyebrow">Popular views</h3>
+					<a
+						href="command:gitlens.showGraph"
+						data-requires="repo"
+						title="Show Commit Graph"
+						aria-label="Show Commit Graph"
+						><code-icon icon="gl-graph"></code-icon><span>Commit Graph ✨</span></a
+					>
+					<a
+						href="command:gitlens.showFocusPage"
+						data-requires="repo"
+						title="Open Focus"
+						aria-label="Open Focus"
+						><code-icon icon="target"></code-icon><span>Focus ✨</span></a
+					>
+					<a
+						href="command:gitlens.showCommitsView"
+						data-requires="repo"
+						title="Show Commits view"
+						aria-label="Show Commits view"
+						><code-icon icon="gl-commits-view"></code-icon><span>Commits</span></a
+					>
+					<a
+						href="command:gitlens.showCommitDetailsView"
+						data-requires="repo"
+						title="Show Commit Details view"
+						aria-label="Show Commit Details view"
+						><code-icon icon="gl-commit-view"></code-icon><span>Commit Details</span></a
+					>
+					<a
+						href="command:gitlens.showFileHistoryView"
+						data-requires="repo"
+						title="Show File History view"
+						aria-label="Show File History view"
+						><code-icon icon="gl-history-view"></code-icon><span>File History</span></a
+					>
+					<a
+						href="command:gitlens.showTimelineView"
+						data-requires="repo"
+						title="Show Visual File History view"
+						aria-label="Show Visual File History view"
+						><code-icon icon="graph-scatter"></code-icon><span>Visual File History ✨</span></a
+					>
+					<a
+						href="command:gitlens.showStashesView"
+						data-requires="repo"
+						title="Show Stashes view"
+						aria-label="Show Stashes view"
+						><code-icon icon="gl-stashes-view"></code-icon>Stashes</a
+					>
+					<a
+						href="command:gitlens.showSearchAndCompareView"
+						data-requires="repo"
+						title="Show Search &amp; Compare view"
+						aria-label="Show Search &amp; Compare view"
+						><code-icon icon="gl-search-view"></code-icon>Search &amp; Compare</a
+					>
+					<a
+						href="command:gitlens.showWorkspacesView"
+						data-requires="repo"
+						title="Show GitKraken Workspaces view"
+						aria-label="Show GitKraken Workspaces view"
+						><code-icon icon="gl-workspaces-view"></code-icon>GitKraken Workspaces ☁️</a
+					>
+					<a
+						href="command:gitlens.showWorktreesView"
+						data-requires="repo"
+						title="Show Worktrees view"
+						aria-label="Show Worktrees view"
+						><code-icon icon="gl-worktrees-view"></code-icon>Worktrees ✨</a
+					>
+				</nav>
+				<nav class="welcome__resources-nav">
+					<h3 class="t-eyebrow">Commands</h3>
+					<a
+						href="command:workbench.action.quickOpen?%22>GitLens%3A%22"
+						title="Show GitLens Commands"
+						aria-label="Show GitLens Commands"
+						><code-icon icon="symbol-event"></code-icon><span>Commands</span></a
+					>
+					<a
+						href="command:gitlens.gitCommands"
+						data-requires="repo"
+						title="Open Git Command Palette"
+						aria-label="Open Git Command Palette"
+						><code-icon icon="symbol-color"></code-icon><span>Git Command Palette</span></a
+					>
+				</nav>
+				<nav class="welcome__resources-nav">
+					<h3 class="t-eyebrow">Configuration</h3>
+					<a
+						href="command:gitlens.showSettingsPage"
+						title="Open GitLens Settings"
+						aria-label="Open GitLens Settings"
+						><code-icon icon="gear"></code-icon><span>GitLens Settings</span></a
+					>
+					<a
+						href="command:gitlens.showSettingsPage?%22autolinks%22"
+						title="Open Autolinks Settings"
+						aria-label="Open Autolinks Settings"
+						><code-icon icon="link"></code-icon><span>Autolinks Settings</span></a
+					>
+				</nav>
+
+				<h2>Resources</h2>
+				<nav class="welcome__resources-nav" aria-label="Help and Resources">
+					<a
+						href="https://help.gitkraken.com/gitlens/gitlens-home"
+						aria-label="Help Center"
+						title="Help Center"
+						><code-icon icon="question"></code-icon>Help</a
+					>
+					<a href="https://twitter.com/gitlens" aria-label="@gitlens on Twitter" title="@gitlens on Twitter"
+						><code-icon icon="twitter"></code-icon>Twitter</a
+					>
+					<a href="https://github.com/gitkraken/vscode-gitlens/issues" aria-label="Feedback" title="Feedback"
+						><code-icon icon="feedback"></code-icon>Issues</a
+					>
+					<a href="https://github.com/gitkraken/vscode-gitlens" aria-label="GitHub Repo" title="GitHub Repo"
+						><code-icon icon="github"></code-icon>GitHub</a
+					>
+					<a
+						href="https://github.com/gitkraken/vscode-gitlens/discussions"
+						aria-label="GitHub Discussions"
+						title="GitHub Discussions"
+						><code-icon icon="comment-discussion"></code-icon>Discussions</a
+					>
+					<a
+						href="https://gitkraken.com/gitlens?utm_source=gitlens-extension&utm_medium=in-app-links&utm_campaign=gitlens-logo-links"
+						aria-label="GitLens Website"
+						title="GitLens Website"
+						><code-icon icon="globe"></code-icon>Website</a
+					>
+				</nav>
+			</section>
+		</main>
+		<footer>
+			<p>
+				✨ Requires a trial or paid plan for use on privately hosted repos
+				<br />
+				☁️ Requires an account and access is based on your plan, e.g. Free, Pro, etc
+			</p>
+		</footer>
+		#{endOfBody}
+	</body>
+</html>
